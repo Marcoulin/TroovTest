@@ -1,16 +1,17 @@
 const mongoose = require("mongoose"); 
-const schema = mongoose.Schema; 
+const Schema = mongoose.Schema; 
 
-const ObjectSchema = new mongoose.Schema({
+const ObjectSchema = new Schema({
+    /*
     id : {
         type: schema.Types.ObjectId, 
     }, 
+    */
 
     state: {
         type: String, 
-        required: true,
     },
-
+    /*
     location:[
         {
             locationType:{
@@ -31,8 +32,9 @@ const ObjectSchema = new mongoose.Schema({
         type: String, 
         required: true
     },
+    */
 }); 
 
-const Objects = mongoose.model("User", ObjectSchema); 
+const Objects = mongoose.model("object", ObjectSchema); 
 
 module.exports = Objects; 

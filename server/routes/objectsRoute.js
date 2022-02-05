@@ -1,20 +1,21 @@
 const express = require("express"); 
+const router = express.Router(); 
+const mongoose = require("mongoose"); 
 const objectsModel = require("../models/objects")
-const app = express(); 
 
-
-app.post("/add_object", async(req, res) => {
+router.post("/add_object", async(req, res) => {
     const object = new objectsModel(req.body)
     try{
         await object.save(); 
         res.send(object); 
     } catch (error){
-        res.status(500).send(error); 
+        console.log(error); 
+        res.status(500).send(error);
     }
 });
 
 
-app.get("/list_objects", async(req, res) => {
+router.get("/list_objects", async(req, res) => {
     const objects = await objectsModel.find({}); 
 
     try {
@@ -24,4 +25,4 @@ app.get("/list_objects", async(req, res) => {
     }
 })
 
-module.exports = app; 
+module.exports = router; 
