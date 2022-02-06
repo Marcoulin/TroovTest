@@ -7,7 +7,7 @@
       <mdb-navbar-nav right>
         <mdb-nav-item active> <NuxtLink to="/">Déclarer un objet</NuxtLink></mdb-nav-item>
         <mdb-nav-item > <NuxtLink to="/list">Rechercher un objet</NuxtLink></mdb-nav-item>
-        <mdb-btn color="success" rounded>Connexion</mdb-btn>
+        <mdb-btn color="success" rounded><NuxtLink to="/login">Connexion</NuxtLink></mdb-btn>
       </mdb-navbar-nav>
     </mdb-navbar-toggler>
   </mdb-navbar>
