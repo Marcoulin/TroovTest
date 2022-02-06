@@ -4,19 +4,19 @@
     <div class="card px-1 py-4">
         <div class="card-body">
             <h6 class="card-title mb-3">Etat</h6>
-            <div class="d-flex flex-row"> <label class="radio mr-1"> <input type="radio" name="add" value="anz" checked> <span> <i class="fa fa-user"></i> Perdu </span> </label> <label class="radio"> <input type="radio" name="add" value="add"> <span> <i class="fa fa-plus-circle"></i> Trouvé </span> </label> </div>
+            <div class="d-flex flex-row"> <label class="radio mr-1"> <input type="radio" name="add" value="Perdu" v-model="state"> <span> <i class="fa fa-user"></i> Perdu </span> </label> <label class="radio"> <input type="radio" name="add" value="Trouvé" v-model="state"> <span> <i class="fa fa-plus-circle"></i> Trouvé </span> </label> </div>
             <h6 class="information mt-4">Adresse</h6>
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <!-- <label for="name">Name</label> --><input class="form-control" type="text" placeholder="Adresse"> </div>
+                        <input v-model="location" class="form-control" type="text" placeholder="Adresse"></div>
                 </div>
             </div>
         
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <div class="input-group"> <input class="form-control" type="text" placeholder="Date"></div>
+                        <div class="input-group"> <input v-model="date" class="form-control" type="text" placeholder="Date"></div>
                     </div>
                 </div>
             </div>
@@ -24,11 +24,11 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <div class="input-group"> <input class="form-control" type="text" placeholder="Type d'objet"></div>
+                        <div class="input-group"> <input v-model="category" class="form-control" type="text" placeholder="Type d'objet"></div>
                     </div>
                 </div>
             </div>
-            <div class=" d-flex flex-column text-center px-5 mt-3 mb-3"> <small class="agree-text">By Booking this appointment you agree to the</small> <a href="#" class="terms">Terms & Conditions</a> </div> <button class="btn btn-primary btn-block confirm-button">Confirm</button>
+            <button class="btn btn-primary btn-block confirm-button" @click="addItem({state, location, date, category})">Confirm</button>
         </div>
     </div>
 </div>
@@ -39,6 +39,55 @@
 
 <script>
 export default {
-  name: 'NuxtTutorial',
+  computed: {
+      state: {
+          get(){
+              return this.$store.state.object.state;
+          },
+          set(value){
+              this.$store.commit("object/setState", value)
+          }
+      },
+
+      location: {
+          get(){
+              return this.$store.state.object.location; 
+          },
+          set(value){
+              this.$store.commit("object/setLocation", value)
+          }
+      },
+
+      date: {
+          get(){
+              return this.$store.state.object.date; 
+          },
+          set(value){
+              this.$store.commit("object/setDate", value)
+          }
+      },
+
+      category: {
+          get(){
+              return this.$store.state.object.category; 
+          },
+          set(value){
+              this.$store.commit("object/setCategory", value)
+          }
+      }
+  },
+  
+  methods: {
+      async addItem(obj){
+          await this.$axios.post("http://localhost:4000/objects/add_objects", {
+              state: obj.status, 
+              location: obj.location,
+              date: obj.date, 
+              category: obj.category
+          })
+      }
+  }
+  
+  
 }
 </script>
