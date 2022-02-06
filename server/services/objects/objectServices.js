@@ -2,7 +2,8 @@ const Objs = require("../../models/objects")
 
 exports.createObj = async (objects) => {
     try{
-        var cObj = await Objs.create(objects);console.log(obj); 
+        var cObj = await Objs.create(objects);
+        console.log(cObj); 
     }catch(e){
         console.log(e); 
     }

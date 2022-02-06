@@ -4,7 +4,7 @@
     <div class="card px-1 py-4">
         <div class="card-body">
             <h6 class="card-title mb-3">Etat</h6>
-            <div class="d-flex flex-row"> <label class="radio mr-1"> <input type="radio" name="add" v-model="state" value="Perdu"> <span> <i class="fa fa-user"></i> Perdu </span> </label> <label class="radio"> <input type="radio" name="add" v-model="state" value="Trouvé"> <span> <i class="fa fa-plus-circle"></i> Trouvé </span> </label> </div>
+            <div class="d-flex flex-row"> <label class="radio mr-1"> <input type="radio" name="add" v-model="status" value="Perdu"> <span> <i class="fa fa-user"></i> Perdu </span> </label> <label class="radio"> <input type="radio" name="add" v-model="status" value="Trouvé"> <span> <i class="fa fa-plus-circle"></i> Trouvé </span> </label> </div>
             <h6 class="information mt-4">Adresse</h6>
             <div class="row">
                 <div class="col-sm-12">
@@ -28,7 +28,7 @@
                     </div>
                 </div>
             </div>
-            <button class="btn btn-primary btn-block confirm-button" @click="addItem({state, location, date, category})">Confirm</button>
+            <button class="btn btn-primary btn-block confirm-button" @click="addItem({status, location, date, category})">Confirm</button>
         </div>
     </div>
 </div>
@@ -37,9 +37,9 @@
 <script>
 export default {
   computed: {
-      state: {
+      status: {
           get(){
-              return this.$store.state.object.state;
+              return this.$store.state.object.status;
           },
           set(value){
               this.$store.commit("object/setStatus", value)
@@ -77,7 +77,7 @@ export default {
   methods: {
       async addItem(obj){
           await this.$axios.post("http://localhost:4000/objects/add_objects", {
-              state: obj.status, 
+              status: obj.status, 
               location: obj.location,
               date: obj.date, 
               category: obj.category
