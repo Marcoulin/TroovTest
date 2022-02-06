@@ -1,4 +1,4 @@
-const objectService = require("../services/objects/objectServices")
+const objectService = require("../services/objectServices")
 
 exports.postObjects = async (req, res, next) => {
     try {

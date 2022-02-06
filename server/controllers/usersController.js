@@ -1,4 +1,4 @@
-const usrService = require("../services/users/usersService");
+const usrService = require("../services/usersService");
 
 exports.login = async (req, res) => {
     try{

@@ -1,4 +1,4 @@
-const Objs = require("../../models/objects")
+const Objs = require("../models/objects")
 
 exports.createObj = async (objects) => {
     try{
