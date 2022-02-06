@@ -1,15 +1,15 @@
 const express = require("express"); 
-const router = express.Router(); 
-const mongoose = require("mongoose"); 
+const router = express.Router();
+const userController = require("../controllers/objectsController") 
 const objectsModel = require("../models/objects")
 
 router.post("/add_object", async(req, res) => {
-    const object = new objectsModel(req.body)
+    const object = new objectsModel(req.body); 
     try{
         await object.save(); 
+        console.log("Object send"); 
         res.send(object); 
     } catch (error){
-        console.log(error); 
         res.status(500).send(error);
     }
 });

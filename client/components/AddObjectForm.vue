@@ -4,7 +4,7 @@
     <div class="card px-1 py-4">
         <div class="card-body">
             <h6 class="card-title mb-3">Etat</h6>
-            <div class="d-flex flex-row"> <label class="radio mr-1"> <input type="radio" name="add" value="Perdu" v-model="state"> <span> <i class="fa fa-user"></i> Perdu </span> </label> <label class="radio"> <input type="radio" name="add" value="Trouvé" v-model="state"> <span> <i class="fa fa-plus-circle"></i> Trouvé </span> </label> </div>
+            <div class="d-flex flex-row"> <label class="radio mr-1"> <input type="radio" name="add" v-model="state" value="Perdu"> <span> <i class="fa fa-user"></i> Perdu </span> </label> <label class="radio"> <input type="radio" name="add" v-model="state" value="Trouvé"> <span> <i class="fa fa-plus-circle"></i> Trouvé </span> </label> </div>
             <h6 class="information mt-4">Adresse</h6>
             <div class="row">
                 <div class="col-sm-12">
@@ -34,9 +34,6 @@
 </div>
 </template>
 
-<style scoped src="../assets/AddObjectFromStyle.css">
-</style>
-
 <script>
 export default {
   computed: {
@@ -45,7 +42,7 @@ export default {
               return this.$store.state.object.state;
           },
           set(value){
-              this.$store.commit("object/setState", value)
+              this.$store.commit("object/setStatus", value)
           }
       },
 
@@ -91,3 +88,7 @@ export default {
   
 }
 </script>
+
+<style scoped src="../assets/AddObjectFromStyle.css">
+</style>
+
