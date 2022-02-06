@@ -1,5 +1,5 @@
 <template>
-  <AddObjectForm />
+  <Tutorial />
 </template>
 
 <script>
