@@ -3,6 +3,7 @@ const app = express();
 const cors = require("cors"); 
 require("./server")
 const objectsRoute = require("./routes/objectsRoute"); 
+const usersRoute = require("./routes/usersRoute"); 
 const bodyParser = require("body-parser"); 
 
 app.use(bodyParser.json()); 
@@ -16,6 +17,8 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.static('public')); 
 
 app.use('/objects', objectsRoute); 
+
+app.use('/users', usersRoute); 
 
 app.listen(4000, () => {
   console.log("Server is running at port 4000");
