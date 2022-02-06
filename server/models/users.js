@@ -10,5 +10,7 @@ const UserSchema = new Schema({
 }).pre('save', function(next) {
     this.password = bcrypt.hashSync(this.password, salt); 
     console.log(this.password)
-    next; 
+    next(); 
 })
+
+module.exports = UserSchema; 
