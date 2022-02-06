@@ -12,10 +12,7 @@ exports.createUsers = async (user) => {
 }; 
 
 exports.getByEmailAndPassword = async (email, password) => {
-    const user = await User.findOne({email}); 
-    return bcrypt.compareSync(password, user.password) ? { secret: jwt.sign({
-        id: user._id,
-        name: user.name,
-        email: user.email
-    }, process.env.SECRET) } : { secret: null }
+    const user = await Users.findOne({email}); 
+    const validPassword = await bcrypt.compare(password, user.password); 
+    return validPassword; 
 }
