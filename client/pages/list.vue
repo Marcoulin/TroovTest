@@ -1,0 +1,4 @@
+<template>
+    <ObjectTable />
+</template>
+
