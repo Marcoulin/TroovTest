@@ -11,6 +11,8 @@ const UserSchema = new Schema({
     this.password = bcrypt.hashSync(this.password, salt); 
     console.log(this.password)
     next(); 
-})
+}); 
 
-module.exports = UserSchema; 
+const Users = mongoose.model("users", UserSchema); 
+
+module.exports = Users; 
