@@ -6,7 +6,6 @@ const ObjectSchema = new Schema({
         type: Schema.Types.ObjectId, 
     }, 
     
-
     state: {
         type: String, 
     },
