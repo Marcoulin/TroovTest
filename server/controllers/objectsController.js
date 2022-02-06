@@ -1,32 +1,33 @@
-const postObjectService = require("../services/objects/post") 
-const getObjectService = require("../services/objects/get")
+const objectService = require("../services/objects/objectServices")
 
-const postObjects = async (req, res) => {
-    try{
+exports.postObjects = async (req, res, next) => {
+    try {
         const {
-            state, 
-            location, 
-            date, 
+            status,
+            location,
+            date,
             category
-        } = req.body
-        const newObj = await postObjectService.create({
-            state, 
-            location, 
-            date, 
+
+        } = req.body;
+        const object = await objectService.createObj({
+            status,
+            location,
+            date,
             category
-        }); 
-        res.status(200).json(newObj); 
-    }catch(error){
-        res.status(500).json(error); 
+        });
+        return res.status(200).json(object);
+    } catch (error) {
+        console.log(error);
     }
 }
 
-const getObjects = async (req, res) => {
-    try{
-        res.status(200).json((await getObjectService.all()))
-    }catch (error)
-    {
-        res.status(500).json(error)
+exports.listObjects = async (req, res, next) => {
+    try {
+        var listOfObjects = await objectService.readObj({});
+        return res.status(200).json({ data: listOfObjects, message: "Objects successfuly retrieved" });
+    } catch (error) {
+        console.log(error);
     }
 }
+
 

@@ -11,3 +11,7 @@ mongoose.connect(
     }
 );
 
+let db = mongoose.connection; 
+db.on('open', console.info.bind(console, "Connection to the database successful")); 
+
+

@@ -1,10 +1,16 @@
-const express = require("express"); 
+const express = require("express");
 const app = express(); 
 const cors = require("cors"); 
 require("./server")
 const objectsRoute = require("./routes/objectsRoute"); 
 
-app.use(cors()); 
+app.use(cors());
+
+app.use(express.json()); 
+
+app.use(express.urlencoded({extended: true})); 
+
+app.use(express.static('public')); 
 
 app.use('/objects', objectsRoute); 
 
