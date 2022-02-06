@@ -22,6 +22,7 @@ exports.postObjects = async (req, res, next) => {
 }
 
 exports.listObjects = async (req, res, next) => {
+    console.log("retrieving users"); 
     try {
         var listOfObjects = await objectService.readObj({});
         return res.status(200).json({ data: listOfObjects, message: "Objects successfuly retrieved" });

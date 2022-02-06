@@ -1,58 +1,44 @@
 <template>
-  <div>
-    <h2>Table</h2>
-    <v-data-table :headers="headers" :items="objects">
-      <!--<template v-slot:[`item.edit`]="{ item }">
-        <v-btn color="success" @click="editItem(item)"> Edit </v-btn>
-      </template>
-      <template v-slot:[`item.delete`]="{ item }">
-        <v-btn color="danger" @click="deleteItem(item._id)"> Delete </v-btn>
-      </template>-->
+<div class = "container">
+    <v-data-table
+        :headers = "headers"
+        :items = "objects">
     </v-data-table>
-  </div>
+</div>
 </template>
-
 
 <script>
 export default {
-  data() {
-    return {
-      headers: [
-        { text: "Id", value: "_id" },
-        { text: "State", value: "state" },
-        { text: "Location", value: "location" },
-        { text: "Date", value: "date" },
-        { text: "Category", value: "category" },
-      ],
-    };
-  },
-  computed: {
-    objects() {
-      return this.$store.state.objects.data;
+    data(){
+        return{
+            objects: [],
+            headers: [
+                {text: "Status", value: "status"},
+                {text: "Location", value: "location"}, 
+                {text: "Date", value: "date"},
+                {text: "Category", value: "category"}
+            ] ,
+            
+        };
     },
-  },
-  async fetch() {
-    this.$store.commit(
-      "objects/storeData",
-      (await this.$axios.get("http://localhost:4000/objects/read_objects")).data
-    );
-  },
-  /*
-  methods: {
-    async deleteItem(id) {
-      await this.$axios.delete("http://localhost:4000/users/" + id);
-      this.$store.commit(
-        "users/storeData",
-        (await this.$axios.get("http://localhost:4000/users")).data
-      );
+    watch: {
+        options: {
+            handler(){
+                this.readFromApi(); 
+            },
+        },
+        deep: true,
     },
-    async editItem(user) {
-      this.$store.commit("user/setId", user._id);
-      this.$store.commit("user/setName", user.name);
-      this.$store.commit("user/setEmail", user.email);
-      this.$store.commit("user/setPassword", user.password);
+    methods: {
+        async readFromApi(){
+            await this.$axios.get("http://localhost:4000/objects/read_objects")
+            .then((response) => {
+                this.objects = response.data.data; 
+            })
+        }
     },
-  },
-  */
-};
+    mounted(){
+        this.readFromApi();
+    }
+}
 </script>
