@@ -6,9 +6,10 @@
             <v-card elevation="0">
               <v-card-text>
                 <v-form>
+                  <v-text-field v-model="username" label="Enter your username" name="username" prepend-inner-icon="mdi-user" class="rounded-0" outlined></v-text-field>
                   <v-text-field v-model="email" label="Enter your email" name="email" prepend-inner-icon="mdi-email" type="email" class="rounded-0" outlined></v-text-field>
-                  <v-text-field v-model="password" label="Enter your password" name="password" prepend-inner-icon="mdi-lock" type="password" suffix="| Forgot?" class="rounded-0" outlined></v-text-field>
-                  <v-btn class="rounded-0" color="#68dbc9" x-large block dark @click="login({email, password})">Login</v-btn>
+                  <v-text-field v-model="password" label="Enter your password" name="password" prepend-inner-icon="mdi-lock" type="password" class="rounded-0" outlined></v-text-field>
+                  <v-btn class="rounded-0" color="#68dbc9" x-large block dark @click="signup({username, email, password})">Sign up</v-btn>
                   <v-card-actions class="text--secondary">
                     <v-checkbox color="#000000" label="Remember me"></v-checkbox>
                     <v-spacer></v-spacer>
@@ -32,20 +33,23 @@ export default {
    },
    data(){
       return{
+         username: '',
          email: '',
          password: ''
       }
    },
    methods: {
-     async login(user){
+     async signup(user){
        try{
-         await this.$axios.post("http://localhost:4000/users/login", {
+         await this.$axios.post("http://localhost:4000/users/signing", {
+           username: user.username,
            email: user.email, 
            password: user.password
          }).then((response) => {
-            if(response.data.secret){
-               this.$router.push('/'); 
-            }
+             if(response.data.token)
+             {
+                 this.$router.push("/"); 
+             }
          })
        }catch(e){
          this.error = e.response.data.message

@@ -5,6 +5,9 @@ const config = require("../auth.config");
 
 exports.createUsers = async (user) => {
     try{
+        if(Users.findOne(user.email)){
+            return false; 
+        }
         var usr = await Users.create(user)
         console.log(usr); 
     }catch(error){

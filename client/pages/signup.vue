@@ -1,0 +1,3 @@
+<template>
+    <UserSignUpForm />
+</template>
