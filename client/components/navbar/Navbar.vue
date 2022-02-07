@@ -1,29 +1,58 @@
 <template>
-  <mdb-navbar expand="large" dark color="indigo">
-    <mdb-navbar-brand href="#">
-      Troov
-    </mdb-navbar-brand>
-    <mdb-navbar-toggler>
-      <mdb-navbar-nav right>
-        <mdb-nav-item active> <NuxtLink to="/">Déclarer un objet</NuxtLink></mdb-nav-item>
-        <mdb-nav-item > <NuxtLink to="/list">Rechercher un objet</NuxtLink></mdb-nav-item>
-        <mdb-btn color="success" rounded><NuxtLink to="/login">Connexion</NuxtLink></mdb-btn>
-      </mdb-navbar-nav>
-    </mdb-navbar-toggler>
-  </mdb-navbar>
+  <v-card color="basil">
+    <v-card-title class="text-center justify-center py-6">
+      <h1 class="font-weight-bold text-h2 basil--text">
+        TROOV
+      </h1>
+      <v-btn class="justify-center"
+       absolute 
+       right  
+       elevation="8"
+       background
+       color="#FFFBE6"
+       to="/login">
+        Connexion
+      </v-btn>
+    </v-card-title>
+
+    <v-tabs
+      v-model="tab"
+      background-color="transparent"
+      color="68dbc9"
+      grow
+    >
+      <v-tab to="/">Déclarer un objet</v-tab> 
+      <v-tab to="/list">Trouver un objet (liste)</v-tab>
+    </v-tabs>
+
+    <v-tabs-items v-model="tab">
+      <v-tab-item>
+        <v-card
+          color="68dbc9"
+          flat
+        >
+        </v-card>
+      </v-tab-item>
+    </v-tabs-items>
+  </v-card>
 </template>
 
+<style>
+/* Helper classes */
+.basil {
+  background-color: #68dbc9 !important;
+}
+.basil--text {
+  color: #FFFBE6 !important;
+}
+</style>
+
 <script>
-  import { mdbNavbar, mdbNavbarBrand, mdbNavbarToggler, mdbNavbarNav, mdbNavItem, mdbBtn } from 'mdbvue';
   export default {
-    name: 'Navbar',
-    components: {
-      mdbNavbar,
-      mdbNavbarBrand,
-      mdbNavbarToggler,
-      mdbNavbarNav,
-      mdbNavItem,
-      mdbBtn
-    }
+    data () {
+      return {
+        tab: null,
+      }
+    },
   }
 </script>

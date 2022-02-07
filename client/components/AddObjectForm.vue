@@ -36,45 +36,15 @@
 
 <script>
 export default {
-  computed: {
-      status: {
-          get(){
-              return this.$store.state.object.status;
-          },
-          set(value){
-              this.$store.commit("object/setStatus", value)
-          }
-      },
-
-      location: {
-          get(){
-              return this.$store.state.object.location; 
-          },
-          set(value){
-              this.$store.commit("object/setLocation", value)
-          }
-      },
-
-      date: {
-          get(){
-              return this.$store.state.object.date; 
-          },
-          set(value){
-              this.$store.commit("object/setDate", value)
-          }
-      },
-
-      category: {
-          get(){
-              return this.$store.state.object.category; 
-          },
-          set(value){
-              this.$store.commit("object/setCategory", value)
-          }
-      }
-  },
-  
-  methods: {
+    data(){
+        return{
+            status: '', 
+            location: '', 
+            date: '',
+            category: ''
+        }
+    },
+    methods: {
       async addItem(obj){
           await this.$axios.post("http://localhost:4000/objects/add_objects", {
               status: obj.status, 
