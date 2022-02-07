@@ -35,7 +35,8 @@ export default {
     'bootstrap-vue/nuxt',
     'mdbvue/nuxt',
     '@nuxtjs/axios',
-    '@nuxtjs/vuetify'
+    '@nuxtjs/vuetify',
+    '@nuxtjs/auth'
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

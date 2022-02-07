@@ -1,4 +1,6 @@
 const usrService = require("../services/usersService");
+const jwt = require('jsonwebtoken');
+
 
 exports.login = async (req, res) => {
     try{
@@ -6,12 +8,12 @@ exports.login = async (req, res) => {
             email, 
             password
         } = req.body; 
-
         const logged = await usrService.getByEmailAndPassword(
             email, 
             password
         );
-        res.status(200).json(logged)
+
+        res.status(200).json(logged); 
     }catch(error){
         console.log(error); 
     }

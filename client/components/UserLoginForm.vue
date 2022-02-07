@@ -1,6 +1,6 @@
 <template>
    <v-app id="inspire">
-      <v-content>
+      <v-main>
          <v-container fluid fill-height>
             <v-layout align-center justify-center>
                <v-flex xs12 sm8 md4>
@@ -15,7 +15,7 @@
                               label="Login"
                               type="text"
                               v-model= "email"
-                           ></v-text-field>
+                           >{{email}}</v-text-field>
                            <v-text-field
                               id="password"
                               name="password"
@@ -27,13 +27,13 @@
                      </v-card-text>
                      <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="primary" to="/">Login</v-btn>
+                        <v-btn color="primary" @click="login({email, password})">Login</v-btn>
                      </v-card-actions>
                   </v-card>
                </v-flex>
             </v-layout>
          </v-container>
-      </v-content>
+      </v-main>
    </v-app>
 </template>
 
@@ -44,21 +44,25 @@ export default {
       source: String,
    },
    data(){
-     return{
-       email: '', 
-       password: '',
-       error: null
-     }
+      return{
+         user: {
+            
+            email: "",
+            password: ""
+         }
+      }
    },
-
    methods: {
-     async login(){
+     async login(user){
        try{
-         await this.$axios.get("http://localhost:4000/users/login", {
-           email: this.email, 
-           password: this.password
+         await this.$axios.post("http://localhost:4000/users/login", {
+           email: user.email, 
+           password: user.password
+         }).then((response) => {
+            if(response.data.secret){
+               this.$router.push('/'); 
+            }
          })
-         this.$router.push('/')
        }catch(e){
          this.error = e.response.data.message
        }
