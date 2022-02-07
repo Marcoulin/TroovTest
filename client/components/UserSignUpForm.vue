@@ -6,14 +6,12 @@
             <v-card elevation="0">
               <v-card-text>
                 <v-form>
-                  <v-text-field v-model="username" label="Enter your username" name="username" prepend-inner-icon="mdi-user" class="rounded-0" outlined></v-text-field>
+                  <v-text-field v-model="username" label="Enter your username" name="username" prepend-inner-icon="mdi-mdiAccount" class="rounded-0" outlined></v-text-field>
                   <v-text-field v-model="email" label="Enter your email" name="email" prepend-inner-icon="mdi-email" type="email" class="rounded-0" outlined></v-text-field>
                   <v-text-field v-model="password" label="Enter your password" name="password" prepend-inner-icon="mdi-lock" type="password" class="rounded-0" outlined></v-text-field>
                   <v-btn class="rounded-0" color="#68dbc9" x-large block dark @click="signup({username, email, password})">Sign up</v-btn>
                   <v-card-actions class="text--secondary">
-                    <v-checkbox color="#000000" label="Remember me"></v-checkbox>
                     <v-spacer></v-spacer>
-                    No account? <a class="pl-2" style="color: #000000">Sign Up</a>
                   </v-card-actions>
                 </v-form>
               </v-card-text>
@@ -27,10 +25,6 @@
 </template>
 <script>
 export default {
-   name: 'Login',
-   props: {
-      source: String,
-   },
    data(){
       return{
          username: '',
@@ -45,11 +39,8 @@ export default {
            username: user.username,
            email: user.email, 
            password: user.password
-         }).then((response) => {
-             if(response.data.token)
-             {
-                 this.$router.push("/"); 
-             }
+         }).then(() => {
+             this.$router.push("/"); 
          })
        }catch(e){
          this.error = e.response.data.message

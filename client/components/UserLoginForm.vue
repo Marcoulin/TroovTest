@@ -10,9 +10,8 @@
                   <v-text-field v-model="password" label="Enter your password" name="password" prepend-inner-icon="mdi-lock" type="password" suffix="| Forgot?" class="rounded-0" outlined></v-text-field>
                   <v-btn class="rounded-0" color="#68dbc9" x-large block dark @click="login({email, password})">Login</v-btn>
                   <v-card-actions class="text--secondary">
-                    <v-checkbox color="#000000" label="Remember me"></v-checkbox>
                     <v-spacer></v-spacer>
-                    No account? <a class="pl-2" style="color: #000000">Sign Up</a>
+                    No account? <NuxtLink to="/sign">Sign Up</NuxtLink>
                   </v-card-actions>
                 </v-form>
               </v-card-text>
@@ -26,10 +25,6 @@
 </template>
 <script>
 export default {
-   name: 'Login',
-   props: {
-      source: String,
-   },
    data(){
       return{
          email: '',
