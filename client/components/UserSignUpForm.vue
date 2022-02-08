@@ -6,7 +6,7 @@
             <v-card elevation="0">
               <v-card-text>
                 <v-form>
-                  <v-text-field v-model="username" label="Enter your username" name="username" prepend-inner-icon="mdi-mdiAccount" class="rounded-0" outlined></v-text-field>
+                  <v-text-field v-model="username" label="Enter your username" name="username" prepend-inner-icon="mdi-account" class="rounded-0" outlined></v-text-field>
                   <v-text-field v-model="email" label="Enter your email" name="email" prepend-inner-icon="mdi-email" type="email" class="rounded-0" outlined></v-text-field>
                   <v-text-field v-model="password" label="Enter your password" name="password" prepend-inner-icon="mdi-lock" type="password" class="rounded-0" outlined></v-text-field>
                   <v-btn class="rounded-0" color="#68dbc9" x-large block dark @click="signup({username, email, password})">Sign up</v-btn>

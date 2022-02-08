@@ -75,6 +75,8 @@ export default {
               location: obj.location,
               date: obj.date, 
               category: obj.category
+          }).then(() => {
+              this.$route.push("/list"); 
           })
       },
       save (date) {
