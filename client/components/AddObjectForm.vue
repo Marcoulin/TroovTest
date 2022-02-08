@@ -23,12 +23,12 @@
                     <h6 class="information mt-4">Date</h6>
                         <v-row justify="center">
                             <v-date-picker
-                            v-model="date"
+                            v-model="picker"
                             year-icon="mdi-calendar-blank"
                             prev-icon="mdi-skip-previous"
                             next-icon="mdi-skip-next"
                             ></v-date-picker>
-                        </v-row>        
+                        </v-row>
                     </div>
                 </div>
             </div>

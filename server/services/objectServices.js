@@ -20,5 +20,13 @@ exports.readObj = async (query) => {
     }
 }
 
+exports.deleteObj = async (id) => {
+    try {
+        var dObj = await Objs.findByIdAndDelete(id); 
+    }catch (e){
+        console.log(e)
+    }
+}
+
 
   

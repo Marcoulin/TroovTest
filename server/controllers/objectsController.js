@@ -1,6 +1,6 @@
 const objectService = require("../services/objectServices")
 
-exports.postObjects = async (req, res, next) => {
+exports.postObjects = async (req, res) => {
     try {
         const {
             status,
@@ -21,13 +21,23 @@ exports.postObjects = async (req, res, next) => {
     }
 }
 
-exports.listObjects = async (req, res, next) => {
+exports.listObjects = async (req, res) => {
     console.log("retrieving users"); 
     try {
         var listOfObjects = await objectService.readObj({});
         return res.status(200).json({ data: listOfObjects, message: "Objects successfuly retrieved" });
     } catch (error) {
         console.log(error);
+    }
+}
+
+exports.removeObjects = async (req, res) => {
+    try{
+        const deleteUsr = await objectService.deleteObj(req.params.id); 
+        res.status(200).json({deleteUsr}); 
+    } catch(e)
+    {
+        res.status(500).json(e); 
     }
 }
 
