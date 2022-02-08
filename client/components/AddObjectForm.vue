@@ -20,9 +20,15 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                    <v-row justify="center">
-                        <v-date-picker align-center v-model="date"></v-date-picker>
-                    </v-row>
+                    <h6 class="information mt-4">Date</h6>
+                        <v-row justify="center">
+                            <v-date-picker
+                            v-model="date"
+                            year-icon="mdi-calendar-blank"
+                            prev-icon="mdi-skip-previous"
+                            next-icon="mdi-skip-next"
+                            ></v-date-picker>
+                        </v-row>        
                     </div>
                 </div>
             </div>
@@ -30,13 +36,13 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <div class="input-group">
-                            <v-select
-                            v-model="category"
-                            :items="items"
-                            label="Catégorie"
-                            ></v-select>
-                        </div>
+                        <h6 class="information mt-4">Categorie</h6>
+                        <div class="form-group">
+                        <v-text-field
+                        v-model="category"
+                        label="Catégorie"
+                        required
+                        ></v-text-field></div>
                     </div>
                 </div>
             </div>
@@ -51,8 +57,7 @@ export default {
   
     data () { 
         return{
-            category: 'Téléphone',
-            items: ["Téléphone", "Portefeuile", "Vêtement", "Clefs", "Accessoires"],
+            category: '',
             status: '', 
             location: '', 
             date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
