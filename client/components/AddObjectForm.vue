@@ -9,14 +9,44 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <input v-model="location" class="form-control" type="text" placeholder="Adresse"></div>
+                        <v-text-field
+                        v-model="adresse"
+                        label="Adresse"
+                        required
+                        ></v-text-field></div>
                 </div>
             </div>
         
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <div class="input-group"> <input v-model="date" class="form-control" type="text" placeholder="Date"></div>
+                    <code> {{activePicker || 'null'}} </code>
+                        <v-menu
+                        ref="menu"
+                        v-model="menu"
+                        :close-on-content-click="false"
+                        transition="scale-transition"
+                        offset-y
+                        min-width="auto"
+                                        >
+                        <template v-slot:activator="{ on, attrs }">
+                            <v-text-field
+                            v-model="date"
+                            label="Birthday date"
+                            prepend-icon="mdi-calendar"
+                            readonly
+                            v-bind="attrs"
+                            v-on="on"
+                            ></v-text-field>
+                        </template>
+                        <v-date-picker
+                        v-model="date"
+                        :active-picker.sync="activePicker"
+                        :max="(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)"
+                        min="1950-01-01"
+                        @change="save"
+                        ></v-date-picker>
+                        </v-menu>
                     </div>
                 </div>
             </div>
@@ -24,7 +54,13 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <div class="input-group"> <input v-model="category" class="form-control" type="text" placeholder="Type d'objet"></div>
+                        <div class="input-group">
+                            <v-select
+                            v-model="category"
+                            :items="items"
+                            label="Catégorie"
+                            ></v-select>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -36,13 +72,23 @@
 
 <script>
 export default {
-    data(){
+  
+    data () { 
         return{
+            items: ["Téléphone", "Portefeuile", "Vêtement", "Clefs", "Accessoires"],
             status: '', 
             location: '', 
-            date: '',
-            category: ''
-        }
+            date: null,
+            category: '',
+            menu: false
+        }  
+        
+        
+    },
+    watch: {
+      menu (val) {
+        val && setTimeout(() => (this.activePicker = 'YEAR'))
+      },
     },
     methods: {
       async addItem(obj){
@@ -52,7 +98,10 @@ export default {
               date: obj.date, 
               category: obj.category
           })
-      }
+      },
+      save (date) {
+        this.$refs.menu.save(date)
+      },
   }
   
   
