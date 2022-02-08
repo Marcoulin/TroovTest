@@ -10,7 +10,7 @@
                 <div class="col-sm-12">
                     <div class="form-group">
                         <v-text-field
-                        v-model="adresse"
+                        v-model="location"
                         label="Adresse"
                         required
                         ></v-text-field></div>
@@ -20,33 +20,9 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                    <code> {{activePicker || 'null'}} </code>
-                        <v-menu
-                        ref="menu"
-                        v-model="menu"
-                        :close-on-content-click="false"
-                        transition="scale-transition"
-                        offset-y
-                        min-width="auto"
-                                        >
-                        <template v-slot:activator="{ on, attrs }">
-                            <v-text-field
-                            v-model="date"
-                            label="Birthday date"
-                            prepend-icon="mdi-calendar"
-                            readonly
-                            v-bind="attrs"
-                            v-on="on"
-                            ></v-text-field>
-                        </template>
-                        <v-date-picker
-                        v-model="date"
-                        :active-picker.sync="activePicker"
-                        :max="(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)"
-                        min="1950-01-01"
-                        @change="save"
-                        ></v-date-picker>
-                        </v-menu>
+                    <v-row justify="center">
+                        <v-date-picker align-center v-model="date"></v-date-picker>
+                    </v-row>
                     </div>
                 </div>
             </div>
@@ -75,15 +51,12 @@ export default {
   
     data () { 
         return{
+            category: 'Téléphone',
             items: ["Téléphone", "Portefeuile", "Vêtement", "Clefs", "Accessoires"],
             status: '', 
             location: '', 
-            date: null,
-            category: '',
-            menu: false
-        }  
-        
-        
+            date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+        }        
     },
     watch: {
       menu (val) {
